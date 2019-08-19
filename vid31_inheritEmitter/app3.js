@@ -10,7 +10,7 @@ Persion.prototype.sayHello=function(){
 }
 
 function Student(){
-    Persion.call(this);//Nếu không có dòng này thì thằng Student nó k dc kế thừa các thuộc tính của Persion
+    Persion.apply(this);//Nếu không có dòng này thì thằng Student nó k dc kế thừa các giá trị thuộc tính của Persion
     this.id="1234";
 }
 
