@@ -31,7 +31,7 @@ var compressed= fs.createWriteStream(__dirname+'/readme.txt.gz');
 var gzip=zlib.createGzip();
 
 var gunzip=zlib.createGunzip();
-var read_zip=fs.createReadStream(__dirname+'/readme.txt.gz',{
+var read_zip=fs.createReadStream(__dirname+"/readme.txt.gz",{
     encodeing: 'utf-8',
     highWaterMark: 32*2014
 }
