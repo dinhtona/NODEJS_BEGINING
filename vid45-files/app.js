@@ -5,7 +5,7 @@ var content = fs.readFileSync(__dirname+'/readme.txt','utf-8');//đọc file đ�
 
 //console.log(content);
 
-var content2= fs.readFile(__dirname + '/readme3.txt','utf-8',(err,data)=>{
+var content2= fs.readFile(__dirname + '/readme.txt','utf-8',(err,data)=>{
     if (err) {
         console.log('err: ',err);
         
