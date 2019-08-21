@@ -2,6 +2,7 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 
 var app = express();
+app.set('view engine', 'ejs'); //express'll auto find views folder, it is has template file
 
 var port = 2000;
 
@@ -20,13 +21,7 @@ app.use('/assets', express.static(__dirname + '/public'));//midleware: tạo ra 
 
 //functions
 const index = (req, res) => {
-    res.send(`
-        <link rel='stylesheet' type="text/css" href='/assets/style.css' />
-        <h1>Express Server Node JS HOME</h1>
-        <p>Request time: ${req.requestTime}</p>
-
-        <p>Cookies: ${JSON.stringify(req.cookies)}</p>
-    `);//href='/assets/style.css' : Truy cập tới file style.css trong public đã dược map thành /assest/
+    res.render('index');//access to views folder and get index.ejs file
 }
 //end functions
 
@@ -50,7 +45,8 @@ app.get('/user', (req, res) => {
 app.get('/user/:id', (req, res) => {// /:name
     res.cookie("username", req.params.id);
     //res.send(req.params); //lấy tham số client truyền vào: req.params.id
-    res.send(`User ID: ${req.params.id}`);
+    // res.send(`User ID: ${req.params.id}`);
+    res.render('user', { ID: req.params.id });
 });
 
 app.listen(port, () => {
