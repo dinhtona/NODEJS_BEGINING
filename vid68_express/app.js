@@ -27,6 +27,11 @@ app.get('/user', (req, res) => {
     res.json(user);//giống như trên
 }); //test save
 
+app.get('/user/:id', (req, res) => {// /:name
+    //res.send(req.params); //lấy tham số client truyền vào: req.params.id
+    res.send(`User ID: ${req.params.id}`);
+});
+
 app.listen(port, () => {
     console.log('Server listening on Port: ' + port);
 })
