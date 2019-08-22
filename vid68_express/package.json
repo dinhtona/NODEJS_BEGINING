@@ -1,15 +1,26 @@
 {
   "name": "express-node-app",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "nodemon app.js"
   },
   "author": "TONA",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "express": "^4.17.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dinhtona/NODEJS_BEGINING.git",
+    "private": true
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
   }
 }

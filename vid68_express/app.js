@@ -1,5 +1,6 @@
 var express = require('express');
-var cookieParser = require('cookie-parser');
+var cookieParser = require('cookie-parser'); //get cookie from req
+var bodyParser = require('body-parser'); // get body post request
 var fs = require('fs');
 
 var app = express();
@@ -22,14 +23,14 @@ app.use('/assets', express.static(__dirname + '/public'));//midleware: tạo ra 
 
 //functions
 const index = (req, res) => {
-    //res.render('index');//access to views folder and get index.ejs file
+    res.render('index');//access to views folder and get index.ejs file
 
     //get stream file
-    var rIndex = fs.createReadStream(__dirname + '/index.html', {
-        encoding: 'utf-8',
-        highWaterMark: 16 * 1024
-    });
-    rIndex.pipe(res);
+    // var rIndex = fs.createReadStream(__dirname + '/index.html', {
+    //     encoding: 'utf-8',
+    //     highWaterMark: 16 * 1024
+    // });
+    // rIndex.pipe(res);
 }
 //end functions
 
@@ -59,7 +60,19 @@ app.get('/user/:id', (req, res) => {// /:name
     res.cookie("username", req.params.id);
     //res.send(req.params); //lấy tham số client truyền vào: req.params.id
     // res.send(`User ID: ${req.params.id}`);
-    res.render('user', { ID: req.params.id, queryString: req.query.qstr });
+    res.render('user', { ID: req.params.id, queryString: req.query.qstr, bodyParser: req.body });
+});
+
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var jsonParser = bodyParser.json();
+
+app.post('/login', urlencodedParser, (req, res) => {
+    res.send(`Wellcome ${req.body.username}`);
+    console.log(`
+    From Post request:
+    - Username: ${req.body.username} 
+    - Password: ${req.body.password}
+    `);
 });
 
 app.listen(port, () => {
