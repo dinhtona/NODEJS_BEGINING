@@ -75,6 +75,14 @@ app.post('/login', urlencodedParser, (req, res) => {
     `);
 });
 
+app.post('/loginjs', jsonParser, (req, res) => {
+    res.send(`Wellcome ${JSON.stringify(req.body)}`);
+    console.log(`
+    From Post request:
+    ${JSON.stringify(req.body)}
+    `);
+})
+
 app.listen(port, () => {
     console.log('Server listening on Port: ' + port);
 })
