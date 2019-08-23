@@ -5,6 +5,8 @@ var fs = require('fs');
 
 var app = express();
 app.set('view engine', 'ejs'); //express'll auto find views folder, it is has template file
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var jsonParser = bodyParser.json();
 
 var port = 2000;
 
@@ -56,15 +58,36 @@ app.get('/user', (req, res) => {
  * req.params: /user/:id <=> /5
  * req.query: ?query_name <=> ?qstr
  */
-app.get('/user/:id', (req, res) => {// /:name
-    res.cookie("username", req.params.id);
-    //res.send(req.params); //lấy tham số client truyền vào: req.params.id
-    // res.send(`User ID: ${req.params.id}`);
-    res.render('user', { ID: req.params.id, queryString: req.query.qstr, bodyParser: req.body });
+// app.get('/user/:id', (req, res) => {// /:name
+//     res.cookie("username", req.params.id);
+//     //res.send(req.params); //lấy tham số client truyền vào: req.params.id
+//     // res.send(`User ID: ${req.params.id}`);
+//     res.render('user', { ID: req.params.id, queryString: req.query.qstr, bodyParser: req.body });
+// });
+
+app.get('/api/user/:id', (req, res) => {
+    //get user from database
+    const result = {
+        fName: 'Chu Bin',
+        lName: 'Kai'
+    }
+    res.json(result);
 });
 
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
-var jsonParser = bodyParser.json();
+app.post('/api/user', jsonParser, (req, res) => {
+    //create new an user and save to database
+
+});
+
+app.put('/api/user', jsonParser, (req, res) => {
+    //update an user
+});
+
+app.delete('/api/user', jsonParser, (req, res) => {
+    //delete an user
+});
+
+
 
 app.post('/login', urlencodedParser, (req, res) => {
     res.send(`Wellcome ${req.body.username}`);
