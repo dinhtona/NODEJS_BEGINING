@@ -1,5 +1,8 @@
 var express = require('express');
 var cookieParser = require('cookie-parser'); //get cookie from req
+var apiControllers = require('./controllers/apiController');
+var homeControllers = require('./controllers/homeController');
+
 
 var fs = require('fs');
 
@@ -24,6 +27,8 @@ app.use('/assets', express.static(__dirname + '/public'));//midleware: tạo ra 
 
 //functions
 
+apiControllers(app);
+homeControllers(app);
 
 app.listen(port, () => {
     console.log('Server listening on Port: ' + port);

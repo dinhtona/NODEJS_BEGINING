@@ -1,3 +1,6 @@
+var bodyParser = require('body-parser'); // get body post request
+var jsonParser = bodyParser.json();
+
 module.exports = function (app) {
     app.get('/api/user/:id', (req, res) => {
         //get user from database

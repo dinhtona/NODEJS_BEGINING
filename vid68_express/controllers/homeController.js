@@ -1,7 +1,8 @@
+
+
+var bodyParser = require('body-parser'); // get body post request
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var jsonParser = bodyParser.json();
-var bodyParser = require('body-parser'); // get body post request
-
 
 module.exports = function (app) {
 
