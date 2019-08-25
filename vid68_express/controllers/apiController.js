@@ -1,4 +1,4 @@
-var bodyParser = require('body-parser'); // get body post request
+var bodyParser = require('body-parser'); // get body post requestr
 var jsonParser = bodyParser.json();
 
 module.exports = function (app) {
