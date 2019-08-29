@@ -15,8 +15,9 @@ var port = 2000;
 //custom midleware: write log when client request
 app.use('/', (req, res, next) => { //next : bắt buộc phải có để có thể chạy tiếp các midleware khác nữa
     var ip = req.headers['x-real-ip'] || req.connection.remoteAddress;;
-    console.log('IP: ' + ip + '\nRequest URL: ' + req.url);
-    req.requestTime = new Date().getTime();
+    console.log('Request URL: ' + req.url);
+    req.requestTime = new Date().getTime(); //Add a prop to req  
+
 
     next();
 });
