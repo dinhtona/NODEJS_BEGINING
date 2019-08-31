@@ -3,6 +3,7 @@ var cookieParser = require('cookie-parser'); //get cookie from req
 var apiControllers = require('./controllers/apiController');
 var homeControllers = require('./controllers/homeController');
 const MongoClient = require('mongodb').MongoClient;
+// const mongoose = require('mongoose');
 //const assert = require('assert');
 
 //var fs = require('fs');//Work with Files
@@ -10,27 +11,9 @@ const MongoClient = require('mongodb').MongoClient;
 var app = express();
 app.set('view engine', 'ejs'); //express'll auto find views folder, it is has template file
 
-
 var port = 2000;
 
-var querystring = require("querystring");
-// var result = querystring.stringify({ query: "SELECT name FROM user WHERE uid = me()" });
-let passEncode = querystring.stringify('Onlyyou@79');
-let connectString = 'mongodb+srv://m4ulov3:' + passEncode + '@mongodbpart01-dxhak.gcp.mongodb.net/test?retryWrites=true&w=majority';
 
-const uri = "mongodb+srv://m4ulov3:Onlyyou@79@mongodbpart01-dxhak.gcp.mongodb.net/test?retryWrites=true&w=majority";
-
-const client = new MongoClient(connectString, { useNewUrlParser: true, useUnifiedTopology: true });
-client.connect(err => {
-    if (err)
-        console.log('MongoClient Err: ', err);
-    else {
-        const collection = client.db("test").collection("devices");
-    }
-
-    // perform actions on the collection object
-    client.close();
-});
 
 // mongoose.connect(connectString, (err) => {
 //     if (err) {
@@ -53,6 +36,25 @@ app.use('/', (req, res, next) => { //next : bắt buộc phải có để có th
     var ip = req.headers['x-real-ip'] || req.connection.remoteAddress;;
     console.log('Request URL: ' + req.url);
     req.requestTime = new Date().getTime(); //Add a prop to req  
+
+    const uri = "mongodb+srv://m4ulov3:Onlyyou%4079@mongodbpart01-dxhak.gcp.mongodb.net/mongodb_part01?retryWrites=true&w=majority";
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    client.connect(err => {
+        if (err)
+            console.log('Connect Error: ', err);
+        const db = client.db('mongodb_part01');
+        const collection = db.collection("sinhvien");
+
+        collection.findOne({}, function (err, result) {
+            if (err) throw err;
+            console.log('result: ', result);
+
+        });
+        //console.log('collection: ', collection);
+        // perform actions on the collection object
+        client.close();
+    });
+
 
     // var hoa = new Person({
     //     fName: "TONA",
