@@ -3,6 +3,7 @@ var cookieParser = require('cookie-parser'); //get cookie from req
 var apiControllers = require('./controllers/apiController');
 var homeControllers = require('./controllers/homeController');
 const MongoClient = require('mongodb').MongoClient;
+var ObjectId = require('mongodb').ObjectId;
 // const mongoose = require('mongoose');
 //const assert = require('assert');
 
@@ -37,18 +38,19 @@ app.use('/', (req, res, next) => { //next : bắt buộc phải có để có th
     console.log('Request URL: ' + req.url);
     req.requestTime = new Date().getTime(); //Add a prop to req  
 
-    const uri = "mongodb+srv://m4ulov3:Onlyyou%4079@mongodbpart01-dxhak.gcp.mongodb.net/mongodb_part01?retryWrites=true&w=majority";
+    const uri = "mongodb+srv://m4ulov3:Onlyyou%4079@mongodbpart01-dxhak.gcp.mongodb.net/sample_supplies?retryWrites=true&w=majority";
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     client.connect(err => {
         if (err)
             console.log('Connect Error: ', err);
-        const db = client.db('mongodb_part01');
-        const collection = db.collection("sinhvien");
+        const db = client.db('sample_supplies');
+        const collection = db.collection("sales");
 
-        collection.findOne({}, function (err, result) {
-            if (err) throw err;
-            console.log('result: ', result);
+        collection.findOne({ '_id': ObjectId("5bd761dcae323e45a93ccffb") }, function (err, result) {
+            if (err) console.log('Error: ', err);
 
+            res.json(result)
+            console.log('Result: ', result);
         });
         //console.log('collection: ', collection);
         // perform actions on the collection object
