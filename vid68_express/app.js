@@ -12,7 +12,7 @@ var ObjectId = require('mongodb').ObjectId;
 var app = express();
 app.set('view engine', 'ejs'); //express'll auto find views folder, it is has template file
 
-var port = 2000;
+var port = 3000;
 
 
 

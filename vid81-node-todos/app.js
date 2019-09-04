@@ -1,13 +1,13 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
+var express = require('express');
+let bodyParser = require('body-parser');
+let morgan = require('morgan');
 
-const app = express();
-const port = process.env.PORT || 8080;
+let app = express();
+const port = 9000;//process.env.PORT || 
 
 app.use('/assets', express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));//chấp nhận tất cả các kiểu dữ liệu post lên server
-app.use(bodyParser.json);
+app.use(bodyParser.json());
 
 
 app.use(morgan('dev')); //ghi log ra những request gửi tới server
@@ -15,7 +15,7 @@ app.use(morgan('dev')); //ghi log ra những request gửi tới server
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('index.ejs');
 });
 
 app.listen(port, () => {
